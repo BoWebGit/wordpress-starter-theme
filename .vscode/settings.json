@@ -1,0 +1,30 @@
+{
+    "sass.andStared": [
+        "active",
+        "focus",
+        "hover",
+        "nth-child"
+    ],
+    "liveSassCompile.settings.generateMap": false,
+    "liveSassCompile.settings.formats": [
+      {
+        "format": "expanded",
+        "extensionName": ".css",
+        "savePath": "./"
+      },
+      {
+        "format": "compressed",
+        "extensionName": ".min.css",
+        "savePath": "./"
+      }
+    ],
+    "liveSassCompile.settings.autoprefix": [  
+        "> 1%",
+        "last 10 versions"
+    ],
+    "liveSassCompile.settings.showOutputWindow": true,
+    "liveSassCompile.settings.excludeList": [
+      "**/node_modules/**",
+      "**/dist/**"
+    ]
+  }

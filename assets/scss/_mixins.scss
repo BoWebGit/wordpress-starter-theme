@@ -1,0 +1,127 @@
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+$grid-columns: 12;
+$grid-gutter-width: 16px;
+$margi-row: 72px;
+
+@function grid-width($n) {
+  @return ($n / $grid-columns) * 100%;
+}
+
+@function gutter-width() {
+  @return $grid-gutter-width / 2;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: gutter-width();
+  padding-right: gutter-width();
+
+
+  @each $breakpoint, $size in $grid-breakpoints {
+    @if $size != 0 {
+      @media (min-width: $size) {
+        max-width: $size - $grid-gutter-width - $margi-row;
+      }
+    } @else {
+      max-width: 100%;
+    }
+  }
+}
+
+.row {
+  margin-left: -gutter-width();
+  margin-right: -gutter-width();
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+  padding-left: gutter-width();
+  padding-right: gutter-width();
+}
+
+
+  
+@each $breakpoint, $size in $grid-breakpoints {
+    @if $size != 0 {
+        @media (min-width: $size) {
+            @for $i from 1 through $grid-columns {
+                .col-#{$breakpoint}-#{$i} {
+                    flex: 0 0 auto;
+                    width: grid-width($i);
+                }
+            }
+            @for $j from 1 through $grid-columns {
+                .col-#{$breakpoint}-offset-#{$j} {
+                    margin-left: grid-width($j);
+                }
+            }
+        }
+    } @else {
+        @for $i from 1 through $grid-columns {
+            .col-#{$i} {
+                flex: 0 0 auto;
+                width: grid-width($i);
+            }
+        }
+        @for $j from 1 through $grid-columns {
+            .col-offset-#{$j} {
+                margin-left: grid-width($j);
+            }
+        }
+    }
+}
+
+@mixin sm {
+    @media (min-width: map-get($grid-breakpoints, sm)) {
+        @content;
+    }
+ }
+ 
+ @mixin md {
+    @media (min-width: map-get($grid-breakpoints, md)) {
+        @content;
+    }
+ }
+ 
+ @mixin lg {
+    @media (min-width: map-get($grid-breakpoints, lg)) {
+        @content;
+    }
+ }
+ 
+ @mixin xl {
+    @media (min-width: map-get($grid-breakpoints, xl)) {
+        @content;
+    }
+ }
+
+ @mixin xxl {
+    @media (min-width: map-get($grid-breakpoints, xxl)) {
+        @content;
+    }
+ }
+
+@mixin rwd-max($screen) {
+    @media (max-width: $screen) {
+        @content;
+    }
+}
+
+@mixin rwd-min($screen) {
+    @media (min-width: $screen) {
+        @content;
+    }
+}
