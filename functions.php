@@ -56,8 +56,8 @@ function bo_web_scripts() {
 add_action( 'wp_enqueue_scripts', 'bo_web_scripts' );
 
 
-
 require get_template_directory() . '/inc/template-functions.php';
+require get_template_directory() . '/inc/template-custom-post-type.php';
 
 
 ?>
